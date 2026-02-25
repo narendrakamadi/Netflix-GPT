@@ -9,6 +9,9 @@
 - Form Validation
 - useRef Hook
 - Firebase setup and deploy app on firebase https://netflixgpt-c8aa3.web.app/
+- Create sign up user account in firebase
+- Redux Setup
+- Created redux store with redux slice
 
 # Features
 
