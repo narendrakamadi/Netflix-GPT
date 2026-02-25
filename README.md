@@ -6,6 +6,9 @@
 - Header
 - Login Form
 - Sign Up Form
+- Form Validation
+- useRef Hook
+- Firebase setup and deploy app on firebase https://netflixgpt-c8aa3.web.app/
 
 # Features
 
