@@ -4,6 +4,8 @@ export const BG_IMG = "https://assets.nflxext.com/ffe/siteui/vlv3/37372b0c-16ef-
 
 export const PHOTO_URL = "https://avatars.githubusercontent.com/u/6338797?v=4";
 
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w780/";
+
 export const API_OPTIONS = {
     method: 'GET',
     headers: {
