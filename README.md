@@ -12,6 +12,11 @@
 - Create sign up user account in firebase
 - Redux Setup
 - Created redux store with redux slice
+- Bug fix of navigation and logout
+- Unsubscribed to the onAuthStateChangeCallback
+- Updated hardcoded values in constants
+- Registered in TMDB and created app for api credentials
+- Made a API call and fetch the movie data
 
 # Features
 

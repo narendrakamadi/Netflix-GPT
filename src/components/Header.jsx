@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { Link } from "react-router-dom";
+import { LOGO } from "../utils/constants";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Header = () => {
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 const { uid, email, displayName, photoURL } = user;
                 dispatch(
@@ -31,6 +32,9 @@ const Header = () => {
                 navigate("/");
             }
         });
+
+        // Unsubscribe when component unmounts
+        return () => unsubscribe();
     }, []);
 
     const handleSignOut = () => {
@@ -44,11 +48,11 @@ const Header = () => {
 
     return (
         <div className="fixed top-0 z-50 w-full bg-black/50 backdrop-blur-sm">
-            <div className="flex items-center px-6 py-3">
+            <div className="flex items-center px-4 md:px-12 py-3">
                 <Link to="/">
                     <img
                         className="w-24 cursor-pointer hover:opacity-80"
-                        src="https://images.ctfassets.net/y2ske730sjqp/821Wg4N9hJD8vs5FBcCGg/9eaf66123397cc61be14e40174123c40/Vector__3_.svg?w=460"
+                        src={LOGO}
                         alt="Netflix Logo"
                     />
                 </Link>
