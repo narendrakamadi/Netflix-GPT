@@ -5,12 +5,16 @@ import { checkValidData } from "../utils/Validate";
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [isSignInForm, setIsSignInForm] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
 
@@ -42,8 +46,20 @@ const Login = () => {
             )
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    console.log(user);
-                    navigate("/browse");
+
+                    updateProfile(user, {
+                        displayName: fullName.current.value,
+                        photoURL:
+                            "https://avatars.githubusercontent.com/u/6338797?v=4",
+                    })
+                        .then(() => {
+                            const user = auth.currentUser;
+                            dispatch(addUser(user));
+                            navigate("/browse");
+                        })
+                        .catch((error) => {
+                            setErrorMessage(error.message);
+                        });
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -114,7 +130,7 @@ const Login = () => {
                         </div>
                     )}
                     <button
-                        className="my-6 w-full rounded-lg bg-red-700 p-4 text-base"
+                        className="my-6 w-full rounded-lg bg-red-700 p-4 text-base cursor-pointer"
                         onClick={handleButtonClick}
                     >
                         {isSignInForm ? "Sign In" : "Sign Up"}

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Login from "./Login";
 import Browse from "./Browse";
+import Error from "./Error";
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
@@ -19,12 +20,28 @@ const Body = () => {
             path: "/browse",
             element: <Browse />,
         },
+        {
+            path: "/error",
+            element: <Error />,
+        },
+        {
+            path: "*",
+            element: <Error />,
+        },
     ]);
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                dispatch(addUser({ user }));
+                const { uid, email, displayName, photoURL } = user;
+                dispatch(
+                    addUser({
+                        uid: uid,
+                        email: email,
+                        displayName: displayName,
+                        photoURL: photoURL,
+                    }),
+                );
             } else {
                 dispatch(removeUser());
             }
