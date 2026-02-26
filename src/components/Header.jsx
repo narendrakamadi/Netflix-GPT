@@ -1,19 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { auth } from "../utils/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addUser, removeUser } from "../utils/userSlice";
+import { Link } from "react-router-dom";
 
 const Header = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((store) => store.user);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const { uid, email, displayName, photoURL } = user;
+                dispatch(
+                    addUser({
+                        uid: uid,
+                        email: email,
+                        displayName: displayName,
+                        photoURL: photoURL,
+                    }),
+                );
+                navigate("/browse");
+            } else {
+                dispatch(removeUser());
+                navigate("/");
+            }
+        });
+    }, []);
+
     const handleSignOut = () => {
         signOut(auth)
-            .then(() => {
-                navigate("/");
-            })
+            .then(() => {})
             .catch((error) => {
                 console.log(error);
                 navigate("/error");
@@ -23,12 +45,13 @@ const Header = () => {
     return (
         <div className="fixed top-0 z-50 w-full bg-black/50 backdrop-blur-sm">
             <div className="flex items-center px-6 py-3">
-                {/* Logo */}
-                <img
-                    className="w-24 cursor-pointer hover:opacity-80"
-                    src="https://images.ctfassets.net/y2ske730sjqp/821Wg4N9hJD8vs5FBcCGg/9eaf66123397cc61be14e40174123c40/Vector__3_.svg?w=460"
-                    alt="Netflix Logo"
-                />
+                <Link to="/">
+                    <img
+                        className="w-24 cursor-pointer hover:opacity-80"
+                        src="https://images.ctfassets.net/y2ske730sjqp/821Wg4N9hJD8vs5FBcCGg/9eaf66123397cc61be14e40174123c40/Vector__3_.svg?w=460"
+                        alt="Netflix Logo"
+                    />
+                </Link>
 
                 {/* Navigation Menu */}
                 {user && (
