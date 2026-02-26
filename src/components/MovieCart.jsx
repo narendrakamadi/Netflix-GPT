@@ -5,7 +5,7 @@ const MovieCart = ({ posterPath, title }) => {
     return (
         <div className="w-44 min-w-44 flex flex-col items-center bg-black/60 rounded-lg shadow-md overflow-hidden">
             <img
-                className="w-full h-60 object-cover"
+                className="w-full h-60 object-cover transition-transform duration-300 hover:scale-110"
                 src={IMG_CDN_URL + posterPath}
                 alt={title}
             />
