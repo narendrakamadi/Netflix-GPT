@@ -86,10 +86,10 @@ const Footer = () => {
                 {/* Footer Links Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
                     <div>
-                        <h3 className="text-white font-semibold mb-4">
+                        <h3 className="text-white font-semibold mb-4 text-sm">
                             Features
                         </h3>
-                        <ul className="space-y-2">
+                        <ul className="space-y-2 text-sm font-normal tracking-wide">
                             <li>
                                 <a
                                     href="#"
@@ -125,10 +125,10 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div>
-                        <h3 className="text-white font-semibold mb-4">
+                        <h3 className="text-white font-semibold mb-4 text-sm">
                             Browse
                         </h3>
-                        <ul className="space-y-2">
+                        <ul className="space-y-2 text-sm font-normal tracking-wide">
                             <li className="hover:text-white transition-colors">
                                 <Link to={"/"}>Home</Link>
                             </li>
@@ -159,10 +159,10 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div>
-                        <h3 className="text-white font-semibold mb-4">
+                        <h3 className="text-white font-semibold mb-4 text-sm">
                             Information
                         </h3>
-                        <ul className="space-y-2">
+                        <ul className="space-y-2 text-sm font-normal tracking-wide">
                             <li>
                                 <a
                                     href="#"
@@ -193,8 +193,8 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div>
-                        <h3 className="text-white font-semibold mb-4">More</h3>
-                        <ul className="space-y-2">
+                        <h3 className="text-white font-semibold mb-4 text-sm">More</h3>
+                        <ul className="space-y-2 text-sm font-normal tracking-wide">
                             <li>
                                 <a
                                     href="#"
@@ -233,17 +233,17 @@ const Footer = () => {
 
                 {/* Bottom Info */}
                 <div className="border-t border-gray-700 pt-8">
-                    <p className="text-sm mb-4">
+                    <p className="text-sm mb-4 font-normal">
                         Experience entertainment like never before with Netflix
                         GPT. Our AI-powered platform learns your preferences and
                         delivers personalized movie and TV show recommendations
                         tailored just for you.
                     </p>
                     <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-                        <p className="text-xs">
+                        <p className="text-xs font-normal">
                             © 2026 Netflix GPT. All rights reserved.
                         </p>
-                        <p className="text-xs">
+                        <p className="text-xs font-normal">
                             Made with ❤️ by Narendra Kamadi
                         </p>
                     </div>
