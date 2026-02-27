@@ -3,6 +3,8 @@ import Browse from "./Browse";
 import Error from "./Error";
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
+import Support from "./Support.jsx";
+import Profile from "./Profile.jsx";
 
 const Body = () => {
     const appRouter = createBrowserRouter([
@@ -13,6 +15,14 @@ const Body = () => {
         {
             path: "/browse",
             element: <Browse />,
+        },
+        {
+            path: "/profile",
+            element: <Profile />,
+        },
+        {
+            path: "/support",
+            element: <Support />,
         },
         {
             path: "/error",

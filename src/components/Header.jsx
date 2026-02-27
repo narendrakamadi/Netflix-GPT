@@ -26,7 +26,22 @@ const Header = () => {
                         photoURL: photoURL,
                     }),
                 );
-                navigate("/browse");
+                // Only navigate to browse if user is on login page
+                const allowedPaths = [
+                    "/profile",
+                    "/account",
+                    "/support",
+                    "/browse",
+                ];
+
+                if (
+                    location.pathname === "/" ||
+                    !allowedPaths.some((path) =>
+                        location.pathname.startsWith(path),
+                    )
+                ) {
+                    navigate("/browse");
+                }
             } else {
                 dispatch(removeUser());
                 navigate("/");
@@ -166,24 +181,26 @@ const Header = () => {
                                     </div>
                                     <button className="w-full text-left px-3 py-2 text-white text-xs hover:bg-gray-800/50 transition flex items-center gap-2">
                                         <span>✏️</span>
-                                        <span>Manage Profiles</span>
-                                    </button>
-                                    <button className="w-full text-left px-3 py-2 text-white text-xs hover:bg-gray-800/50 transition flex items-center gap-2">
-                                        <span>📱</span>
-                                        <span>Transfer Profile</span>
+                                        <Link to={"/profile"}>
+                                            <span>Manage Profiles</span>
+                                        </Link>
                                     </button>
                                     <button className="w-full text-left px-3 py-2 text-white text-xs hover:bg-gray-800/50 transition flex items-center gap-2">
                                         <span>👤</span>
-                                        <span>Account</span>
+                                        <Link to={"/account"}>
+                                            <span>Account</span>
+                                        </Link>
                                     </button>
                                     <button className="w-full text-left px-3 py-2 text-white text-xs hover:bg-gray-800/50 transition flex items-center gap-2">
                                         <span>❓</span>
-                                        <span>Help Centre</span>
+                                        <Link to={"/support"}>
+                                            <span>Help Centre</span>
+                                        </Link>
                                     </button>
                                     <div className="border-t border-gray-600/50 mt-2 pt-2">
                                         <button
                                             onClick={handleSignOut}
-                                            className="w-full text-left px-3 py-2 text-white text-xs hover:bg-gray-800/50 transition"
+                                            className="w-full text-left cursor-pointer px-3 py-2 text-white text-xs hover:bg-gray-800/50 transition"
                                         >
                                             Sign out of Netflix
                                         </button>
