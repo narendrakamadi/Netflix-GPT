@@ -7,20 +7,20 @@ const SecondaryContainer = () => {
         <div className="relative z-20 -mt-145 pt-96 bg-gradient-to-t from-black via-black to-transparent">
             <div className="space-y-8 pb-10">
                 <MovieList
-                    title={"New on Netflix"}
+                    title={"Now Playing Movies"}
                     movies={movies.nowPlayingMovies}
                 />
                 <MovieList
-                    title={"Continue Watching for Narendra"}
-                    movies={movies.nowPlayingMovies}
+                    title={"Popular Movies"}
+                    movies={movies.popularMovies}
                 />
                 <MovieList
-                    title={"Kids Animation"}
-                    movies={movies.nowPlayingMovies}
+                    title={"Upcoming Movies"}
+                    movies={movies.upcomingMovies}
                 />
                 <MovieList
-                    title={"Asian TV Shows"}
-                    movies={movies.nowPlayingMovies}
+                    title={"Top Rated Movies"}
+                    movies={movies.topRatedMovies}
                 />
             </div>
         </div>

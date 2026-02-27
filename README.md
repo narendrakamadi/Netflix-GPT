@@ -19,6 +19,7 @@
 - Made a API call and fetch the movie data
 - Implemented footer
 - Bug fixes of video cart
+- As firebase hosting was not working so integrated vercel hosting
 
 # Features
 
