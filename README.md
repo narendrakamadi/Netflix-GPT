@@ -17,6 +17,8 @@
 - Updated hardcoded values in constants
 - Registered in TMDB and created app for api credentials
 - Made a API call and fetch the movie data
+- Implemented footer
+- Bug fixes of video cart
 
 # Features
 
