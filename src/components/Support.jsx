@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -107,13 +107,20 @@ const Support = () => {
         ]
     };
 
-    const filteredFaqs = searchQuery
-        ? Object.values(faqs).flat().filter(
-            faq =>
-                faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-        : faqs[activeCategory];
+    const filteredFaqs = useMemo(() => {
+        if (!searchQuery) {
+            return faqs[activeCategory];
+        }
+
+        const lowerCaseQuery = searchQuery.toLowerCase();
+        const allFaqs = Object.values(faqs).flat();
+
+        return allFaqs.filter((faq) =>
+            faq.question.toLowerCase().includes(lowerCaseQuery) ||
+            faq.answer.toLowerCase().includes(lowerCaseQuery)
+        );
+
+    }, [searchQuery, faqs, activeCategory]);
 
     return (
         <div className="min-h-screen bg-black text-white">
@@ -213,7 +220,6 @@ const Support = () => {
                     </button>
                 </div>
             </div>
-
             <Footer />
         </div>
     );

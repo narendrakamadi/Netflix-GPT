@@ -5,6 +5,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 import Support from "./Support.jsx";
 import Profile from "./Profile.jsx";
+import Account from "./Account.jsx";
 
 const Body = () => {
     const appRouter = createBrowserRouter([
@@ -19,6 +20,10 @@ const Body = () => {
         {
             path: "/profile",
             element: <Profile />,
+        },
+        {
+            path: "/account",
+            element: <Account />,
         },
         {
             path: "/support",

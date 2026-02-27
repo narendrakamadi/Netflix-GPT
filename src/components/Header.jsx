@@ -75,9 +75,11 @@ const Header = () => {
                 {/* Navigation Menu */}
                 {user && (
                     <nav className="hidden md:flex gap-6 text-white text-xs font-normal tracking-wide ml-8">
-                        <a href="#" className="hover:text-gray-400 transition">
-                            Home
-                        </a>
+                        <Link to={"/"}>
+                            <span className="hover:text-gray-400 transition">
+                                Home
+                            </span>
+                        </Link>
                         <a href="#" className="hover:text-gray-400 transition">
                             Shows
                         </a>
