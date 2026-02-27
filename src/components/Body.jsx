@@ -6,6 +6,7 @@ import { RouterProvider } from "react-router-dom";
 import Support from "./Support.jsx";
 import Profile from "./Profile.jsx";
 import Account from "./Account.jsx";
+import Shows from "./Shows.jsx";
 
 const Body = () => {
     const appRouter = createBrowserRouter([
@@ -16,6 +17,10 @@ const Body = () => {
         {
             path: "/browse",
             element: <Browse />,
+        },
+        {
+            path: "/shows",
+            element: <Shows />,
         },
         {
             path: "/profile",

@@ -32,6 +32,7 @@ const Header = () => {
                     "/account",
                     "/support",
                     "/browse",
+                    "/shows",
                 ];
 
                 if (
@@ -75,14 +76,16 @@ const Header = () => {
                 {/* Navigation Menu */}
                 {user && (
                     <nav className="hidden md:flex gap-6 text-white text-xs font-normal tracking-wide ml-8">
-                        <Link to={"/"}>
+                        <Link to="/browse">
                             <span className="hover:text-gray-400 transition">
                                 Home
                             </span>
                         </Link>
-                        <a href="#" className="hover:text-gray-400 transition">
-                            Shows
-                        </a>
+                        <Link to="/shows">
+                            <span className="hover:text-gray-400 transition">
+                                Shows
+                            </span>
+                        </Link>
                         <a href="#" className="hover:text-gray-400 transition">
                             Movies
                         </a>

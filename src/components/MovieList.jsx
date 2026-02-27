@@ -11,7 +11,6 @@ const MovieList = ({ title, movies }) => {
                 {movies?.map((movie) => (
                     <MovieCart
                         key={movie.id}
-                        movieId={movie.id}
                         title={movie.title}
                         posterPath={movie.poster_path}
                     />
