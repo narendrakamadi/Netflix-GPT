@@ -31,22 +31,6 @@ const Shows = () => {
           }
         : null;
 
-    console.log("featuredShow:", featuredShow);
-
-    const genres = [
-        "All",
-        "Action",
-        "Adventure",
-        "Comedy",
-        "Drama",
-        "Fantasy",
-        "Horror",
-        "Mystery",
-        "Romance",
-        "Sci-Fi",
-        "Thriller",
-    ];
-
     // TV shows categories
     const tvShowsCategories = [
         {

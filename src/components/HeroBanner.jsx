@@ -8,7 +8,7 @@ const HeroBanner = ({ show }) => {
 
     const trailerUrl =
         show.trailerUrl ||
-        `https://www.youtube.com/embed/${show.videoKey}?autoplay=1&mute=1`;
+        `https://www.youtube.com/embed/${show.videoKey}?autoplay=1&mute=1&controls=0&loop=1&playlist=${show.videoKey}`;
 
     return (
         <div className="relative w-full h-screen overflow-hidden group">
@@ -16,14 +16,12 @@ const HeroBanner = ({ show }) => {
             <div className="absolute inset-0 w-full h-full">
                 <iframe
                     ref={videoRef}
-                    width="100%"
-                    height="100%"
                     src={trailerUrl}
                     title={show.title}
                     frameBorder="0"
                     allow="autoplay; fullscreen; picture-in-picture"
                     allowFullScreen
-                    className="w-full h-full object-cover"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77vh] min-w-full h-[56.25vw] min-h-full"
                 />
 
                 {/* Gradient Overlay - Fade to black at bottom */}

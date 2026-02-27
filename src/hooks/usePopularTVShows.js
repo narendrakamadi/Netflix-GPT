@@ -22,6 +22,7 @@ const usePopularTVShows = () => {
                         API_OPTIONS
                     );
                     const videoData = await videoResponse.json();
+
                     const trailer = videoData.results?.find(
                         (v) => v.type === "Trailer"
                     );
