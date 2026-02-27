@@ -1,27 +1,26 @@
 import { useEffect, useState } from "react";
 import { API_OPTIONS } from "../utils/constants";
 
-const useShowVideo = (showId) => {
+const useMovieVideo = (movieId) => {
     const [videoKey, setVideoKey] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        // Reset states when showId changes
+        // Reset states when movieId changes
         setVideoKey(null);
         setError(null);
 
-        if (!showId) {
+        if (!movieId) {
             setLoading(false);
             return;
         }
 
-        const fetchShowVideo = async () => {
+        const fetchMovieVideo = async () => {
             try {
                 setLoading(true);
-                // TV Shows use /tv/ endpoint instead of /movie/
                 const response = await fetch(
-                    `https://api.themoviedb.org/3/tv/${showId}/videos`,
+                    `https://api.themoviedb.org/3/movie/${movieId}/videos`,
                     API_OPTIONS
                 );
 
@@ -30,7 +29,7 @@ const useShowVideo = (showId) => {
                 }
 
                 const data = await response.json();
-                console.log("Video data for show", showId, ":", data);
+                console.log("Video data for movie", movieId, ":", data);
 
                 if (data.results && data.results.length > 0) {
                     // Try to find a trailer first
@@ -41,29 +40,28 @@ const useShowVideo = (showId) => {
                     const video = trailer || data.results.find((v) => v.site === "YouTube") || data.results[0];
 
                     if (video?.key) {
-                        console.log("Found video key for show:", video.key);
+                        console.log("Found video key:", video.key);
                         setVideoKey(video.key);
                     } else {
                         console.log("No video key found in results");
                         // Don't set error - videoKey will be null which is handled gracefully
                     }
                 } else {
-                    console.log("No results found for show", showId);
+                    console.log("No results found for movie", movieId);
                     // Don't set error for empty results - show graceful message instead
                 }
-            } catch (err) {
-                console.error("Error fetching show video:", err);
+                console.error("Error fetching movie video:", err);
                 setError(err.message);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchShowVideo();
-    }, [showId]);
+        fetchMovieVideo();
+    }, [movieId]);
 
     return { videoKey, loading, error };
 };
 
-export default useShowVideo;
+export default useMovieVideo;
 

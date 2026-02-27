@@ -9,11 +9,12 @@ const CategorySection = ({ title, shows }) => {
             <h2 className="text-white text-lg md:text-2xl font-semibold mb-4">
                 {title}
             </h2>
-            // List/Horizontal Scroll View
+            {/* List/Horizontal Scroll View */}
             <div className="flex gap-4 overflow-x-scroll scrollbar-hide pb-4 scroll-smooth">
                 {shows.map((show) => (
                     <MovieCart
                         key={show.id}
+                        showId={show.id}
                         title={show.title || show.name}
                         posterPath={show.poster_path}
                     />
