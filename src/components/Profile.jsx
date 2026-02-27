@@ -164,7 +164,10 @@ const Profile = () => {
                     )}
 
                     {/* Profile Form */}
-                    <form onSubmit={handleSubmit} className="bg-gray-900 rounded-lg p-8">
+                    <form
+                        onSubmit={isEditing ? handleSubmit : (e) => e.preventDefault()}
+                        className="bg-gray-900 rounded-lg p-8"
+                    >
                         {/* Profile Picture */}
                         <div className="mb-8 text-center">
                             <div className="inline-block relative">
@@ -288,7 +291,11 @@ const Profile = () => {
                             {!isEditing ? (
                                 <button
                                     type="button"
-                                    onClick={() => setIsEditing(true)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        setIsEditing(true);
+                                    }}
                                     className="flex-1 bg-white cursor-pointer text-black py-3 rounded font-medium hover:bg-gray-200 transition-colors"
                                 >
                                     Edit Profile
