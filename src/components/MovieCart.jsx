@@ -33,9 +33,9 @@ const MovieCart = ({ posterPath, title, movieId, showId }) => {
         <>
             <div
                 onClick={handleOpenModal}
-                className="w-44 min-w-44 flex flex-col items-center bg-black/60 rounded-lg shadow-md overflow-hidden group cursor-pointer transition-transform duration-300 hover:scale-105 hover:z-10"
+                className="w-28 min-w-28 sm:w-36 sm:min-w-36 md:w-44 md:min-w-44 flex flex-col items-center bg-black/60 rounded-lg shadow-md overflow-hidden group cursor-pointer transition-transform duration-300 sm:hover:scale-105 sm:hover:z-10"
             >
-                <div className="relative w-full h-60 overflow-hidden">
+                <div className="relative w-full h-40 sm:h-52 md:h-60 overflow-hidden">
                     <img
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                         src={IMG_CDN_URL + posterPath}

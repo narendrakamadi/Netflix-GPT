@@ -11,7 +11,7 @@ const HeroBanner = ({ show }) => {
         `https://www.youtube.com/embed/${show.videoKey}?autoplay=1&mute=1&controls=0&loop=1&playlist=${show.videoKey}`;
 
     return (
-        <div className="relative w-full h-screen overflow-hidden group">
+        <div className="relative w-full h-[70vh] md:h-screen overflow-hidden group">
             {/* Video Background */}
             <div className="absolute inset-0 w-full h-full">
                 <iframe
@@ -21,7 +21,7 @@ const HeroBanner = ({ show }) => {
                     frameBorder="0"
                     allow="autoplay; fullscreen; picture-in-picture"
                     allowFullScreen
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77vh] min-w-full h-[56.25vw] min-h-full"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200vw] h-[112.5vw] min-w-full min-h-full md:w-[177.77vh] md:h-[56.25vw]"
                 />
 
                 {/* Gradient Overlay - Fade to black at bottom */}
@@ -30,20 +30,20 @@ const HeroBanner = ({ show }) => {
             </div>
 
             {/* Content - Bottom Left Corner */}
-            <div className="absolute bottom-20 left-12 z-10 max-w-md">
+            <div className="absolute bottom-35 left-4 z-10 max-w-xs sm:max-w-sm md:bottom-45 md:left-12 md:max-w-md">
                 {/* Title - Small */}
-                <h2 className="text-white text-3xl md:text-4xl font-bold mb-2 tracking-wider">
+                <h2 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold mb-2 tracking-wider">
                     {show.title}
                 </h2>
 
                 {/* Description - Small */}
-                <p className="text-white/80 text-sm md:text-base leading-relaxed mb-6 line-clamp-3">
+                <p className="text-white/80 text-xs sm:text-sm md:text-base leading-relaxed mb-4 md:mb-6 line-clamp-3">
                     {show.description}
                 </p>
 
                 {/* Action Buttons */}
-                <div className="flex items-center gap-3">
-                    <button className="flex items-center gap-2 bg-white text-black px-6 py-2 rounded font-semibold text-sm hover:bg-white/80 transition">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                    <button className="flex items-center gap-2 bg-white text-black px-4 py-2 sm:px-6 sm:py-2 rounded font-semibold text-xs sm:text-sm hover:bg-white/80 transition">
                         <svg
                             className="w-5 h-5"
                             fill="currentColor"
@@ -53,7 +53,7 @@ const HeroBanner = ({ show }) => {
                         </svg>
                         Play
                     </button>
-                    <button className="flex items-center gap-2 bg-gray-500/50 text-white px-5 py-2 rounded font-semibold text-sm hover:bg-gray-500/70 transition backdrop-blur-sm">
+                    <button className="flex items-center gap-2 bg-gray-500/50 text-white px-4 py-2 sm:px-5 sm:py-2 rounded font-semibold text-xs sm:text-sm hover:bg-gray-500/70 transition backdrop-blur-sm">
                         <svg
                             className="w-5 h-5"
                             fill="none"
@@ -74,9 +74,6 @@ const HeroBanner = ({ show }) => {
                 {/* Age Rating Badge */}
                 {show.ageRating && (
                     <div className="mt-6 flex items-center gap-3">
-                        <div className="flex items-center justify-center w-10 h-10 border-2 border-white/60 rounded text-white font-bold text-lg">
-                            {show.ageRating}
-                        </div>
                         <span className="text-white/70 text-xs uppercase tracking-wider">
                             {show.genre}
                         </span>
@@ -85,9 +82,9 @@ const HeroBanner = ({ show }) => {
             </div>
 
             {/* Mute/Unmute Button */}
-            <button className="absolute bottom-20 right-12 z-20 flex items-center justify-center w-10 h-10 bg-black/60 rounded-full hover:bg-black/80 transition">
+            <button className="absolute bottom-6 right-4 z-20 flex items-center justify-center w-9 h-9 bg-black/60 rounded-full hover:bg-black/80 transition md:bottom-20 md:right-12 md:w-10 md:h-10">
                 <svg
-                    className="w-6 h-6 text-white"
+                    className="w-5 h-5 text-white md:w-6 md:h-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                 >

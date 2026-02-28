@@ -140,13 +140,8 @@ const Footer = () => {
                                     Movies
                                 </a>
                             </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    className="hover:text-white transition-colors"
-                                >
-                                    Shows
-                                </a>
+                            <li className="hover:text-white transition-colors">
+                                <Link to={"/shows"}>Shows</Link>
                             </li>
                             <li>
                                 <a
@@ -193,7 +188,9 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div>
-                        <h3 className="text-white font-semibold mb-4 text-sm">More</h3>
+                        <h3 className="text-white font-semibold mb-4 text-sm">
+                            More
+                        </h3>
                         <ul className="space-y-2 text-sm font-normal tracking-wide">
                             <li>
                                 <a

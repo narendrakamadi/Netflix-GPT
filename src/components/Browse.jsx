@@ -13,7 +13,7 @@ const Browse = () => {
     useUpcomingMovies();
     useTopRatedMovies();
     return (
-        <div>
+        <div className="bg-black min-h-screen">
             <Header />
             <MainContainer />
             <SecondaryContainer />
