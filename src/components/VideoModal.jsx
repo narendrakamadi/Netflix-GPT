@@ -1,6 +1,13 @@
 import React from "react";
 
-const VideoModal = ({ isOpen, onClose, videoKey, movieTitle, loading, error }) => {
+const VideoModal = ({
+    isOpen,
+    onClose,
+    videoKey,
+    movieTitle,
+    loading,
+    error,
+}) => {
     if (!isOpen) return null;
 
     return (
@@ -40,7 +47,9 @@ const VideoModal = ({ isOpen, onClose, videoKey, movieTitle, loading, error }) =
                             <div className="aspect-video flex items-center justify-center bg-gray-900">
                                 <div className="flex flex-col items-center gap-3">
                                     <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
-                                    <p className="text-white text-sm">Loading video...</p>
+                                    <p className="text-white text-sm">
+                                        Loading video...
+                                    </p>
                                 </div>
                             </div>
                         ) : error ? (
@@ -64,7 +73,14 @@ const VideoModal = ({ isOpen, onClose, videoKey, movieTitle, loading, error }) =
                                             Video Not Available
                                         </p>
                                         <p className="text-gray-300 text-sm max-w-sm">
-                                            Sorry, we couldn't find a video trailer for this {movieTitle?.includes('Season') ? 'season' : 'show'}. Videos may not be available in your region or the content might not have a trailer yet.
+                                            Sorry, we couldn't find a video
+                                            trailer for this{" "}
+                                            {movieTitle?.includes("Season")
+                                                ? "season"
+                                                : "show"}
+                                            . Videos may not be available in
+                                            your region or the content might not
+                                            have a trailer yet.
                                         </p>
                                     </div>
                                     <button
@@ -95,7 +111,9 @@ const VideoModal = ({ isOpen, onClose, videoKey, movieTitle, loading, error }) =
                     {/* Movie Title */}
                     {movieTitle && (
                         <div className="px-6 py-4 border-t border-gray-700">
-                            <h3 className="text-white text-xl font-semibold">{movieTitle}</h3>
+                            <h3 className="text-white text-xl font-semibold">
+                                {movieTitle}
+                            </h3>
                         </div>
                     )}
                 </div>
@@ -121,4 +139,3 @@ const VideoModal = ({ isOpen, onClose, videoKey, movieTitle, loading, error }) =
 };
 
 export default VideoModal;
-

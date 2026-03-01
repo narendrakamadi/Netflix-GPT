@@ -8,24 +8,30 @@ const MovieCart = ({ posterPath, title, movieId, showId }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Use appropriate hook based on whether it's a movie or show
-    const { videoKey: movieVideoKey, loading: movieLoading, error: movieError } = useMovieVideo(
-        isModalOpen && movieId ? movieId : null
-    );
-    const { videoKey: showVideoKey, loading: showLoading, error: showError } = useShowVideo(
-        isModalOpen && showId ? showId : null
-    );
+    const {
+        videoKey: movieVideoKey,
+        loading: movieLoading,
+        error: movieError,
+    } = useMovieVideo(isModalOpen && movieId ? movieId : null);
+    const {
+        videoKey: showVideoKey,
+        loading: showLoading,
+        error: showError,
+    } = useShowVideo(isModalOpen && showId ? showId : null);
 
     const videoKey = movieVideoKey || showVideoKey;
     const loading = movieLoading || showLoading;
     const error = movieError || showError;
 
     const handleOpenModal = () => {
-        console.log("Opening modal for:", movieId ? `movie ${movieId}` : `show ${showId}`);
+        console.log(
+            "Opening modal for:",
+            movieId ? `movie ${movieId}` : `show ${showId}`,
+        );
         setIsModalOpen(true);
     };
 
     const handleCloseModal = () => {
-        console.log("Closing modal");
         setIsModalOpen(false);
     };
 
