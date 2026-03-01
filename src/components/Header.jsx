@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { Link } from "react-router-dom";
 import { LOGO } from "../utils/constants";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -62,6 +63,10 @@ const Header = () => {
             });
     };
 
+    const handleGptSearchClick = () => {
+        dispatch(toggleGptSearchView());
+    };
+
     return (
         <div className="fixed top-0 z-50 w-full bg-black/50 backdrop-blur-sm">
             <div className="flex items-center px-4 md:px-12 py-3">
@@ -107,7 +112,10 @@ const Header = () => {
                 {/* Right Section - Search, Children Toggle, Bell, Profile */}
                 {user && (
                     <div className="flex items-center gap-5 ml-auto">
-                        <button className="text-white hover:opacity-60 transition">
+                        <button
+                            className="text-white hover:opacity-60 transition"
+                            onClick={handleGptSearchClick}
+                        >
                             <svg
                                 className="w-5 h-5"
                                 fill="none"

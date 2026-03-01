@@ -7,6 +7,7 @@ import CategorySection from "./CategorySection";
 import usePopularTVShows from "../hooks/usePopularTVShows";
 import useTopRatedTVShows from "../hooks/useTopRatedTVShows";
 import useAiringTodayTVShows from "../hooks/useAiringTodayTVShows";
+import GptSearch from "./GptSearch";
 
 const Shows = () => {
     // Fetch TV shows data
@@ -16,6 +17,7 @@ const Shows = () => {
 
     // Get TV shows from Redux store
     const tvShows = useSelector((store) => store.movies);
+    const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
     // Featured show data - using the first show from popular TV shows
     const featuredShow = tvShows.popularTVShows?.[0]
@@ -51,19 +53,25 @@ const Shows = () => {
         <div className="bg-black min-h-screen">
             <Header />
 
-            {/* Hero Banner */}
-            <HeroBanner show={featuredShow} />
+            {showGptSearch ? (
+                <GptSearch />
+            ) : (
+                <>
+                    {/* Hero Banner */}
+                    <HeroBanner show={featuredShow} />
 
-            {/* Categories Section */}
-            <div className="relative z-20 -mt-32 space-y-12 pb-10">
-                {tvShowsCategories.map((category, index) => (
-                    <CategorySection
-                        key={index}
-                        title={category.title}
-                        shows={category.shows}
-                    />
-                ))}
-            </div>
+                    {/* Categories Section */}
+                    <div className="relative z-20 -mt-32 space-y-12 pb-10">
+                        {tvShowsCategories.map((category, index) => (
+                            <CategorySection
+                                key={index}
+                                title={category.title}
+                                shows={category.shows}
+                            />
+                        ))}
+                    </div>
+                </>
+            )}
 
             <Footer />
         </div>

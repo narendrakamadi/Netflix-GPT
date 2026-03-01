@@ -20,6 +20,9 @@
 - Implemented footer
 - Bug fixes of video cart
 - As firebase hosting was not working so integrated vercel hosting
+- Integrated Shows list with videos
+- Integrated video player on clicking on movie or show thumbnail
+- GPT search feature
 
 # Features
 
