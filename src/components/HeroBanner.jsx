@@ -9,7 +9,6 @@ const HeroBanner = ({ show }) => {
     const trailerUrl =
         show.trailerUrl ||
         `https://www.youtube.com/embed/${show.videoKey}?autoplay=1&mute=${playWithSound ? 0 : 1}&controls=${playWithSound ? 1 : 0}&loop=1&playlist=${show.videoKey}&playsinline=1&rel=0`;
-
     return (
         <div className="relative w-full h-[70vh] md:h-screen overflow-hidden group">
             {/* Video Background */}

@@ -7,6 +7,7 @@ import CategorySection from "./CategorySection";
 import usePopularTVShows from "../hooks/usePopularTVShows";
 import useTopRatedTVShows from "../hooks/useTopRatedTVShows";
 import useAiringTodayTVShows from "../hooks/useAiringTodayTVShows";
+import useShowVideo from "../hooks/useShowVideo";
 import GptSearch from "./GptSearch";
 
 const Shows = () => {
@@ -19,6 +20,12 @@ const Shows = () => {
     const tvShows = useSelector((store) => store.movies);
     const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
+    // Get the first show's ID for fetching video
+    const firstShowId = tvShows.popularTVShows?.[0]?.id;
+
+    // Fetch video key for the featured show
+    const { videoKey } = useShowVideo(firstShowId);
+
     // Featured show data - using the first show from popular TV shows
     const featuredShow = tvShows.popularTVShows?.[0]
         ? {
@@ -29,7 +36,7 @@ const Shows = () => {
               description: tvShows.popularTVShows[0].overview,
               backgroundImage: `https://image.tmdb.org/t/p/original${tvShows.popularTVShows[0].backdrop_path}`,
               ageRating: "A",
-              videoKey: tvShows.popularTVShows[0].videoKey,
+              videoKey: videoKey,
           }
         : null;
 

@@ -1,6 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import language from "../utils/languageConstants";
 
 const GptSearchBar = () => {
+    const langKey = useSelector((store) => store.config.lang);
+    const lang = language[langKey];
+
     return (
         <div className="w-full space-y-8">
             <form className="w-full" onSubmit={(e) => e.preventDefault()}>
@@ -19,7 +24,12 @@ const GptSearchBar = () => {
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
                             >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2.5}
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                />
                             </svg>
                         </div>
 
@@ -27,7 +37,9 @@ const GptSearchBar = () => {
                         <input
                             className="flex-1 px-4 md:px-6 py-4 md:py-5 text-base md:text-lg bg-transparent text-gray-900 placeholder-gray-400 focus:outline-none font-light tracking-wide"
                             type="text"
-                            placeholder="Search movies, shows, genres..."
+                            placeholder={
+                                lang["Search movies, shows, genres..."]
+                            }
                         />
 
                         {/* Search Button - Integrated */}
@@ -49,17 +61,19 @@ const GptSearchBar = () => {
                 {/* Elegant Divider */}
                 <div className="flex items-center gap-4">
                     <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
-                    <span className="text-xs md:text-sm text-gray-400 font-light tracking-widest uppercase">Or try</span>
+                    <span className="text-xs md:text-sm text-gray-400 font-light tracking-widest uppercase">
+                        Or try
+                    </span>
                     <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
                 </div>
 
                 {/* Sexy Suggestions */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5">
                     {[
-                        { icon: "🔥", text: "Trending Now" },
-                        { icon: "🎬", text: "Action Packed" },
-                        { icon: "💕", text: "Romantic" },
-                        { icon: "🌙", text: "Feel Good" }
+                        { icon: "🔥", text: lang["Trending Now"] },
+                        { icon: "🎬", text: lang["Action Packed"] },
+                        { icon: "💕", text: lang["Romantic"] },
+                        { icon: "🌙", text: lang["Feel Good"] },
                     ].map((item, idx) => (
                         <button
                             key={idx}
@@ -70,9 +84,15 @@ const GptSearchBar = () => {
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-50 transition-opacity duration-500 transform -translate-x-full group-hover:translate-x-full" />
 
                             <div className="relative flex items-center justify-center gap-1">
-                                <span className="text-sm md:text-base">{item.icon}</span>
-                                <span className="hidden md:inline text-xs">{item.text}</span>
-                                <span className="md:hidden text-xs">{item.text.split(" ")[0]}</span>
+                                <span className="text-sm md:text-base">
+                                    {item.icon}
+                                </span>
+                                <span className="hidden md:inline text-xs">
+                                    {item.text}
+                                </span>
+                                <span className="md:hidden text-xs">
+                                    {item.text?.split(" ")[0] || item.text}
+                                </span>
                             </div>
                         </button>
                     ))}
@@ -83,5 +103,3 @@ const GptSearchBar = () => {
 };
 
 export default GptSearchBar;
-
-

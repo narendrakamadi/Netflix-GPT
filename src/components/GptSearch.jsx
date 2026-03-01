@@ -1,8 +1,13 @@
 import GptMovieSuggestions from "./GptMovieSuggestions";
 import GptSearchBar from "./GptSearchBar";
 import { BG_IMG } from "../utils/constants";
+import { useSelector } from "react-redux";
+import language from "../utils/languageConstants";
 
 const GptSearch = () => {
+    const langKey = useSelector((store) => store.config.lang);
+    const lang = language[langKey];
+
     return (
         <div className="relative min-h-screen w-full overflow-x-hidden">
             {/* Background Image with Overlay */}
@@ -24,10 +29,10 @@ const GptSearch = () => {
                         {/* Title Section */}
                         <div className="text-center mb-8 md:mb-12 animate-fade-in">
                             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 tracking-tight">
-                                Discover Your Next Watch
+                                {lang["Discover Your Next Watch"]}
                             </h1>
                             <p className="text-base md:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto">
-                                Tell us what you're in the mood for, and we'll find the perfect match
+                                {lang["Tell us what you're in the mood for, and we'll find the perfect match"]}
                             </p>
                         </div>
 

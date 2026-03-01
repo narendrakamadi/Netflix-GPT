@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { signOut } from "firebase/auth";
@@ -8,12 +8,16 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { Link } from "react-router-dom";
 import { LOGO } from "../utils/constants";
 import { toggleGptSearchView } from "../utils/gptSlice";
+import LanguageSelector from "./languageSelector";
+import language from "../utils/languageConstants";
 
 const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((store) => store.user);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const langKey = useSelector((store) => store.config.lang);
+    const lang = language[langKey];
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -69,10 +73,10 @@ const Header = () => {
 
     return (
         <div className="fixed top-0 z-50 w-full bg-black/50 backdrop-blur-sm">
-            <div className="flex items-center px-4 md:px-12 py-3">
+            <div className="flex items-center px-3 sm:px-4 md:px-12 py-2 sm:py-3">
                 <Link to="/">
                     <img
-                        className="w-24 cursor-pointer hover:opacity-80"
+                        className="w-16 sm:w-20 md:w-24 cursor-pointer hover:opacity-80"
                         src={LOGO}
                         alt="Netflix Logo"
                     />
@@ -80,44 +84,45 @@ const Header = () => {
 
                 {/* Navigation Menu */}
                 {user && (
-                    <nav className="hidden md:flex gap-6 text-white text-xs font-normal tracking-wide ml-8">
+                    <nav className="hidden lg:flex gap-4 xl:gap-6 text-white text-xs font-normal tracking-wide ml-6 xl:ml-8">
                         <Link to="/browse">
                             <span className="hover:text-gray-400 transition">
-                                Home
+                                {lang["Home"]}
                             </span>
                         </Link>
                         <Link to="/shows">
                             <span className="hover:text-gray-400 transition">
-                                Shows
+                                {lang["TV Shows"]}
                             </span>
                         </Link>
                         <a href="#" className="hover:text-gray-400 transition">
-                            Movies
+                            {lang["Movies"]}
                         </a>
                         <a href="#" className="hover:text-gray-400 transition">
-                            Games
+                            {lang["New & Popular"]}
                         </a>
                         <a href="#" className="hover:text-gray-400 transition">
-                            New & Popular
+                            {lang["My List"]}
                         </a>
                         <a href="#" className="hover:text-gray-400 transition">
-                            My List
-                        </a>
-                        <a href="#" className="hover:text-gray-400 transition">
-                            Browse by Languages
+                            {lang["Browse by Languages"]}
                         </a>
                     </nav>
                 )}
 
-                {/* Right Section - Search, Children Toggle, Bell, Profile */}
+                {/* Right Section - Mobile Optimized */}
                 {user && (
-                    <div className="flex items-center gap-5 ml-auto">
+                    <div className="flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 ml-auto">
+                        {/* Language Selector */}
+                        <LanguageSelector />
+
+                        {/* Search Button */}
                         <button
-                            className="text-white hover:opacity-60 transition"
+                            className="text-white hover:opacity-60 transition p-1"
                             onClick={handleGptSearchClick}
                         >
                             <svg
-                                className="w-5 h-5"
+                                className="w-4 h-4 sm:w-5 sm:h-5"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -131,15 +136,15 @@ const Header = () => {
                             </svg>
                         </button>
 
-                        {/* Children Button */}
-                        <button className="text-white text-xs hover:opacity-60 transition">
-                            {user?.displayName ? user.displayName : "User"}
-                        </button>
+                        {/* User Name - Hidden on mobile */}
+                        <span className="md:block text-white text-xs font-medium hover:opacity-60 transition">
+                            {user?.displayName || "User"}
+                        </span>
 
-                        {/* Bell Icon */}
-                        <button className="text-white hover:opacity-60 transition">
+                        {/* Bell Icon - Hidden on small mobile */}
+                        <button className="sm:block text-white hover:opacity-60 transition p-1">
                             <svg
-                                className="w-5 h-5"
+                                className="w-4 h-4 sm:w-5 sm:h-5"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -157,21 +162,23 @@ const Header = () => {
                         <div className="relative">
                             <button
                                 onClick={() => setIsProfileOpen(!isProfileOpen)}
-                                className="flex items-center gap-2 hover:opacity-60 transition"
+                                className="flex items-center gap-1 sm:gap-2 hover:opacity-60 transition"
                             >
-                                <div className="w-7 h-7 rounded bg-yellow-500 flex items-center justify-center text-xs font-bold">
+                                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded bg-yellow-500 flex items-center justify-center text-xs font-bold">
                                     {user?.photoURL ? (
                                         <img
                                             src={user.photoURL}
                                             alt="User"
-                                            className="w-8 h-8 rounded-full object-cover"
+                                            className="w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover"
                                         />
                                     ) : (
-                                        <span className="text-lg">👤</span>
+                                        <span className="text-sm sm:text-lg">
+                                            👤
+                                        </span>
                                     )}
                                 </div>
                                 <svg
-                                    className="w-3 h-3 text-white"
+                                    className="w-3 h-3 text-white hidden sm:block"
                                     fill="currentColor"
                                     viewBox="0 0 20 20"
                                 >
@@ -185,29 +192,31 @@ const Header = () => {
 
                             {/* Dropdown Menu */}
                             {isProfileOpen && (
-                                <div className="absolute right-0 mt-3 w-44 bg-black/95 rounded-lg py-2 shadow-2xl">
+                                <div className="absolute right-0 mt-2 sm:mt-3 w-40 sm:w-44 bg-black/95 rounded-lg py-2 shadow-2xl border border-gray-800">
                                     <div className="px-3 py-2 border-b border-gray-600/50 flex items-center gap-2">
                                         <span className="text-xs">👤</span>
                                         <p className="text-white text-xs font-medium">
-                                            Seema
+                                            {user?.displayName || "User"}
                                         </p>
                                     </div>
                                     <button className="w-full text-left px-3 py-2 text-white text-xs hover:bg-gray-800/50 transition flex items-center gap-2">
                                         <span>✏️</span>
                                         <Link to={"/profile"}>
-                                            <span>Manage Profiles</span>
+                                            <span>
+                                                {lang["Manage Profiles"]}
+                                            </span>
                                         </Link>
                                     </button>
                                     <button className="w-full text-left px-3 py-2 text-white text-xs hover:bg-gray-800/50 transition flex items-center gap-2">
                                         <span>👤</span>
                                         <Link to={"/account"}>
-                                            <span>Account</span>
+                                            <span>{lang["Account"]}</span>
                                         </Link>
                                     </button>
                                     <button className="w-full text-left px-3 py-2 text-white text-xs hover:bg-gray-800/50 transition flex items-center gap-2">
                                         <span>❓</span>
                                         <Link to={"/support"}>
-                                            <span>Help Centre</span>
+                                            <span>{lang["Help Centre"]}</span>
                                         </Link>
                                     </button>
                                     <div className="border-t border-gray-600/50 mt-2 pt-2">
@@ -215,7 +224,7 @@ const Header = () => {
                                             onClick={handleSignOut}
                                             className="w-full text-left cursor-pointer px-3 py-2 text-white text-xs hover:bg-gray-800/50 transition"
                                         >
-                                            Sign out of Netflix
+                                            {lang["Sign Out"]}
                                         </button>
                                     </div>
                                 </div>
